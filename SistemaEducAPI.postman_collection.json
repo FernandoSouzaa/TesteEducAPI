@@ -1,0 +1,782 @@
+{
+	"info": {
+		"_postman_id": "c9407a16-d08f-43f1-9235-9cc2f86676da",
+		"name": "TCC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Registrar um novo usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "educapi-dev",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fernando.ribeiro@teste.com\",\r\n  \"name\": \"Fernando Souza\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fernando.ribeiro@teste.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna usuario se o token for valido",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/auth/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kby5yaWJlaXJvQHRlc3RlLmNvbSIsImV4cCI6MTYzMzA1NTkxOH0.SmFbeLom592hSv1J0Lm2IwVMbOsMgcKpYdZM9_MUjZx8JkcJNYRN18_u2CWJc-vQCIi3uuXxwKvjQzWpdiQPpg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fernando.souza@gmail.com\",\r\n  \"name\": \"Fernando Souza\",\r\n  \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/auth/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta usuario do serviço",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kby5yaWJlaXJvQHRlc3RlLmNvbSIsImV4cCI6MTYzMzA1NTkxOH0.SmFbeLom592hSv1J0Lm2IwVMbOsMgcKpYdZM9_MUjZx8JkcJNYRN18_u2CWJc-vQCIi3uuXxwKvjQzWpdiQPpg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/api/auth/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Challenges",
+			"item": [
+				{
+					"name": "Retornar lista de todos os desafios cadastrado",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/challenges",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"challenges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar um desafio",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/challenges/{{idChallenge}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"challenges",
+								"{{idChallenge}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar desafio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"imageUrl\": \"https://www.google.com/images/bola_furada.png\",\r\n  \"soundUrl\": \"https://www.palcomp3.com/musicalega.mp3\",\r\n  \"videoUrl\": \"https://www.youtube.com/sVx219203.mp4\",\r\n  \"word\": \"BOLAS\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/challenges/{{idContext}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"challenges",
+								"{{idContext}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar desafio de um usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"imageUrl\": \"https://cec-a.akamaihd.net/img-prod/images/standard/porta-pivotante-em-madeira-macica-quartier-eucalipto-210x100cm-natural-cruzeiro-1309907-foto-20180405173925121_225172_A.png\",\r\n  \"soundUrl\": \"https://cec-a.akamaihd.net/img-prod/images/standard/porta-pivotante-em-madeira-macica-quartier-eucalipto-210x100cm-natural-cruzeiro-1309907-foto-20180405173925121_225172_A.png\",\r\n  \"videoUrl\": \"teste\",\r\n  \"word\": \"Porta\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/challenges/{{idChallenge}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"challenges",
+								"{{idChallenge}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar desafio de um usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/challenges/{{idChallenge}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"challenges",
+								"{{idChallenge}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar uma pagina dos desafios cadastrados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/challenges?offset=0?page=0?pageNumber=0?pageSize=0?paged=true?prefix=prefix?size=20?sort.sorted=false?sort.unsorted=false?unpaged=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"challenges"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0?page=0?pageNumber=0?pageSize=0?paged=true?prefix=prefix?size=20?sort.sorted=false?sort.unsorted=false?unpaged=false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Context",
+			"item": [
+				{
+					"name": "Retornar lista de contextos cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/contexts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"contexts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar contexto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"idContext\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"imageUrl\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQg_Sy9i5dqOVGZcUpP078oQsWydrMrjfh_G4W2jQRlsr0DTHLG&usqp=CAU\",\r\n  \"name\": \"Parque de diversões\",\r\n  \"soundUrl\": \"\",\r\n  \"videoUrl\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/contexts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"contexts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar um contexto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"imageUrl\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQg_Sy9i5dqOVGZcUpP078oQsWydrMrjfh_G4W2jQRlsr0DTHLG&usqp=CAU\",\r\n  \"name\": \"Parque\",\r\n  \"soundUrl\": \"\",\r\n  \"videoUrl\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/contexts/{{idContext}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"contexts",
+								"{{idContext}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar um contexto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/contexts/{{idContext}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"contexts",
+								"{{idContext}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar lista de contexto cadastrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/contexts?email=fernando.ribeiro@teste.com&name=Fernando Souza&offset=0&page=0&pageNumber=0&pageSize=0&paged=false&size=20&sort.sorted=false&sort.unsorted=false&unpaged=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"contexts"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "fernando.ribeiro@teste.com"
+								},
+								{
+									"key": "name",
+									"value": "Fernando Souza"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "0"
+								},
+								{
+									"key": "paged",
+									"value": "false"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sort.sorted",
+									"value": "false"
+								},
+								{
+									"key": "sort.unsorted",
+									"value": "false"
+								},
+								{
+									"key": "unpaged",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna um contexto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/contexts/{{idContext}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"contexts",
+								"{{idContext}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
